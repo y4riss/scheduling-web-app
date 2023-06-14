@@ -1,14 +1,12 @@
 const p = {};
 
 const fcfs = (processus, nbProcessus) => {
-  console.log(processus);
-
   let i;
   let j;
   let k;
   let avtemps_att = 0;
   let avtemps_rot = 0;
-  let total_execution = 0;
+  let total_execution = Math.min(...processus.map((obj) => obj.dateArrivee));
 
   let p = {
     name: 'TMP',
@@ -33,10 +31,10 @@ const fcfs = (processus, nbProcessus) => {
     console.log(processus[k].name);
     processus[k].finished = 1; // marke it as finished
     processus[k].waitingTime = total_execution - processus[k].dateArrivee; // calculate waiting time
-    processus[k].burstTime =
+    processus[k].rotation =
       total_execution - processus[k].dateArrivee + processus[k].dureeCycle; // burst time ( rotation )
     avtemps_att += processus[k].waitingTime;
-    avtemps_rot += processus[k].burstTime;
+    avtemps_rot += processus[k].rotation;
 
     total_execution += processus[k].dureeCycle;
   }
@@ -44,7 +42,7 @@ const fcfs = (processus, nbProcessus) => {
   avtemps_att /= nbProcessus;
   avtemps_rot /= nbProcessus;
 
-  console.log(avtemps_att, avtemps_rot);
+  return processus;
 };
 
-export default fcfs;
+export { fcfs };

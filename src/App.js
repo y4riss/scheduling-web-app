@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Output from './components/Output';
 import Input from './components/Input';
-import fcfs from './algorithms/fcfs';
+import { fcfs } from './algorithms/fcfs';
 
 const App = () => {
-  const [nbProcessus, setNbProcessus] = useState(0);
-  let processusArray = null;
+  let processusArray = [];
+  let nbProcessus;
 
+  const [ok, setOk] = useState(false);
+  const [processus, setProcessus] = useState(null);
   const handleInput = (algorithm, dateArrivee, dureeCycle) => {
-    setNbProcessus(dateArrivee.length);
     processusArray = [];
+    nbProcessus = dateArrivee.length;
     for (let i = 0; i < nbProcessus; i++) {
       const processus = {
         name: String.fromCharCode('A'.charCodeAt(0) + i),
@@ -18,13 +20,14 @@ const App = () => {
         finished: 0,
         queued: 0,
         waitingTime: 0,
-        burstTime: 0,
+        rotation: 0,
       };
       processusArray.push(processus);
     }
     switch (algorithm) {
       case '0':
-        fcfs(processusArray, nbProcessus);
+        processusArray = fcfs(processusArray, nbProcessus);
+        setProcessus(processusArray);
         break;
       case '1':
         console.log('sjf');
@@ -43,7 +46,7 @@ const App = () => {
   return (
     <>
       <Input onSubmit={handleInput}></Input>
-      <Output></Output>
+      {processus && <Output processus={processus}></Output>}
     </>
   );
 };

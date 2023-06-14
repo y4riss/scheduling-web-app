@@ -1,10 +1,13 @@
+import React from 'react';
+import Table from './Table';
 
-import React from 'react'
-
-const Output = () => {
+const Output = ({ processus }) => {
+  console.log('from output', processus);
   return (
-    <div>Output</div>
-  )
-}
+    <div className='output'>
+      <Table processus={processus}></Table>
+    </div>
+  );
+};
 
-export default Output
+export default Output;
