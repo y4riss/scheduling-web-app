@@ -11,7 +11,6 @@ const Table = ({ processus }) => {
             <td>Duree cycle</td>
             <td>Temps d'attente</td>
             <td>Temps de rotation</td>
-            <td>Rendement</td>
           </tr>
         </thead>
         <tbody>
@@ -22,9 +21,25 @@ const Table = ({ processus }) => {
               <td>{p.dureeCycle}</td>
               <td>{p.waitingTime}</td>
               <td>{p.rotation}</td>
-              <td>{(p.rotation - p.waitingTime) / p.rotation}</td>
             </tr>
           ))}
+          <tr>
+            <td colSpan={3}>Moyenne</td>
+            <td>
+              {(
+                processus.reduce((acc, p) => {
+                  return acc + p.rotation;
+                }, 0) / processus.length
+              ).toFixed(2)}
+            </td>
+            <td>
+              {(
+                processus.reduce((acc, p) => {
+                  return acc + p.waitingTime;
+                }, 0) / processus.length
+              ).toFixed(2)}
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

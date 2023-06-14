@@ -4,8 +4,6 @@ const fcfs = (processus, nbProcessus) => {
   let i;
   let j;
   let k;
-  let avtemps_att = 0;
-  let avtemps_rot = 0;
   let total_execution = Math.min(...processus.map((obj) => obj.dateArrivee));
 
   let p = {
@@ -33,14 +31,9 @@ const fcfs = (processus, nbProcessus) => {
     processus[k].waitingTime = total_execution - processus[k].dateArrivee; // calculate waiting time
     processus[k].rotation =
       total_execution - processus[k].dateArrivee + processus[k].dureeCycle; // burst time ( rotation )
-    avtemps_att += processus[k].waitingTime;
-    avtemps_rot += processus[k].rotation;
 
     total_execution += processus[k].dureeCycle;
   }
-
-  avtemps_att /= nbProcessus;
-  avtemps_rot /= nbProcessus;
 
   return processus;
 };

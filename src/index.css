@@ -50,6 +50,9 @@ body {
   background-color: #0056b3;
 }
 
+.statistics {
+  margin: 1rem;
+}
 table {
   border-collapse: collapse;
   width: 100%;

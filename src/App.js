@@ -7,7 +7,6 @@ const App = () => {
   let processusArray = [];
   let nbProcessus;
 
-  const [ok, setOk] = useState(false);
   const [processus, setProcessus] = useState(null);
   const handleInput = (algorithm, dateArrivee, dureeCycle) => {
     processusArray = [];
