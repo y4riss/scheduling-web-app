@@ -25,7 +25,7 @@ const fcfs = (processus, nbProcessus) => {
         processus[j].finished === 0 &&
         processus[j].dateArrivee < p.dateArrivee
       ) {
-        p = processus[j];
+        p = { ...processus[j] };
         k = j; // save process index
       }
     }
