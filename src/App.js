@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Output from './components/Output';
 import Input from './components/Input';
 import { fcfs } from './algorithms/fcfs';
+import { sjf } from './algorithms/sjf';
 
 const App = () => {
   let processusArray = [];
@@ -29,7 +30,8 @@ const App = () => {
         setProcessus(processusArray);
         break;
       case '1':
-        console.log('sjf');
+        processusArray = sjf(processusArray, nbProcessus);
+        setProcessus(processusArray);
         break;
       case '2':
         console.log('srt');

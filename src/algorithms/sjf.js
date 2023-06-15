@@ -1,23 +1,45 @@
-const fcfs = (processus, nbProcessus) => {
+const getTotalExecution = (processus, nbProcessus) => {
+  let p = {
+    name: 'TMP',
+    dateArrivee: 0x7ffffff,
+    dureeCycle: 0x7ffffff,
+    finished: 0,
+    queued: 0,
+  };
+
+  for (let i = 0; i < nbProcessus; i++) {
+    if (
+      processus[i].dateArrivee <= p.dateArrivee &&
+      processus[i].dureeCycle < p.dureeCycle
+    )
+      p = { ...processus[i] };
+  }
+
+  return p.dateArrivee;
+};
+
+const sjf = (processus, nbProcessus) => {
   let i;
   let j;
   let k;
-  let total_execution = Math.min(...processus.map((obj) => obj.dateArrivee));
+  let total_execution = getTotalExecution(processus, nbProcessus);
 
   let p = {
     name: 'TMP',
     dateArrivee: 0x7ffffff,
-    dureeCycle: 0,
+    dureeCycle: 0x7ffffff,
     finished: 0,
     queued: 0,
   };
 
   for (i = 0; i < nbProcessus; i++) {
     p.dateArrivee = 0x7ffffff;
+    p.dureeCycle = 0x7ffffff;
     for (j = 0; j < nbProcessus; j++) {
       if (
         processus[j].finished === 0 &&
-        processus[j].dateArrivee < p.dateArrivee
+        processus[j].dateArrivee <= total_execution &&
+        processus[j].dureeCycle < p.dureeCycle
       ) {
         p = { ...processus[j] };
         k = j; // save process index
@@ -34,9 +56,9 @@ const fcfs = (processus, nbProcessus) => {
 
     total_execution += processus[k].dureeCycle;
   }
-  console.log('from FCFS');
 
+  console.log("from sjf");
   return processus;
 };
 
-export { fcfs };
+export { sjf };
