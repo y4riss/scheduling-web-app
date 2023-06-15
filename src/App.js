@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Output from './components/Output';
+import Table from './components/Table';
 import Input from './components/Input';
+import Chart from './components/Chart';
 import { fcfs } from './algorithms/fcfs';
 import { sjf } from './algorithms/sjf';
 
@@ -47,7 +48,8 @@ const App = () => {
   return (
     <>
       <Input onSubmit={handleInput}></Input>
-      {processus && <Output processus={processus}></Output>}
+      <Chart></Chart>
+      {processus && <Table processus={processus}></Table>}
     </>
   );
 };

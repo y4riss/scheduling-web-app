@@ -24,6 +24,10 @@ const sjf = (processus, nbProcessus) => {
   let k;
   let total_execution = getTotalExecution(processus, nbProcessus);
 
+  const first_total_execution = total_execution;
+
+  const chart = document.querySelector('.gantt-chart');
+  chart.innerHTML = '';
   let p = {
     name: 'TMP',
     dateArrivee: 0x7ffffff,
@@ -46,7 +50,16 @@ const sjf = (processus, nbProcessus) => {
       }
     }
 
-    console.log(processus[k].name);
+    chart.innerHTML += ` <div class='chart'>
+     <div class='job'>${processus[k].name}</div>
+    <div class='start'>${
+      total_execution === first_total_execution ? total_execution : ''
+    }</div>
+    <div class='finish'>${
+      total_execution + processus[k].dureeCycle
+    }</div> </div>
+    `;
+
     processus[k].finished = 1; // marke it as finished
     processus[k].waitingTime = Math.max(
       total_execution - processus[k].dateArrivee,
@@ -57,7 +70,7 @@ const sjf = (processus, nbProcessus) => {
     total_execution += processus[k].dureeCycle;
   }
 
-  console.log("from sjf");
+  console.log('from sjf');
   return processus;
 };
 

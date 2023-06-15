@@ -3,7 +3,10 @@ const fcfs = (processus, nbProcessus) => {
   let j;
   let k;
   let total_execution = Math.min(...processus.map((obj) => obj.dateArrivee));
+  const chart = document.querySelector('.gantt-chart');
+  chart.innerHTML = '';
 
+  const first_total_execution = total_execution;
   let p = {
     name: 'TMP',
     dateArrivee: 0x7ffffff,
@@ -24,7 +27,16 @@ const fcfs = (processus, nbProcessus) => {
       }
     }
 
-    console.log(processus[k].name);
+    chart.innerHTML += ` <div class='chart'>
+     <div class='job'>${processus[k].name}</div>
+    <div class='start'>${
+      total_execution === first_total_execution ? total_execution : ''
+    }</div>
+    <div class='finish'>${
+      total_execution + processus[k].dureeCycle
+    }</div> </div>
+    `;
+
     processus[k].finished = 1; // marke it as finished
     processus[k].waitingTime = Math.max(
       total_execution - processus[k].dateArrivee,
@@ -34,7 +46,6 @@ const fcfs = (processus, nbProcessus) => {
 
     total_execution += processus[k].dureeCycle;
   }
-  console.log('from FCFS');
 
   return processus;
 };
