@@ -30,20 +30,22 @@ const Input = ({ onSubmit }) => {
   return (
     <div className='input'>
       <form onSubmit={handleSubmit}>
-        <select name='' id='' value={algorithm} onChange={handleSelectChange}>
+        <label htmlFor=''>Algorithm</label>
+
+        <select value={algorithm} onChange={handleSelectChange}>
           <option value='0'>FCFS</option>
           <option value='1'>SJF</option>
           <option value='2'>SRT</option>
           <option value='3'>ROUND ROBIN</option>
         </select>
 
-        <label htmlFor=''>date d'arrivee</label>
+        <label htmlFor=''>Date d'arrivée</label>
         <input type='text' onChange={(e) => setDateArrivee(e.target.value)} />
 
-        <label htmlFor=''>duree du cycle</label>
+        <label htmlFor=''>Durée du cycle</label>
         <input type='text' onChange={(e) => setDureeCycle(e.target.value)} />
 
-        <button type='submit'>Submit</button>
+        <button type='submit'>Résoudre</button>
       </form>
     </div>
   );
